@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>BX4BREACHSENTINEL — Enterprise Cyber Intelligence & AI Console</title>
+
+  <!-- External Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" crossorigin="anonymous"></script>
+  
+  <!-- External Chart.js Library -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Modular CSS Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- POPUP WELCOME & LOCATION PERMISSION MODAL -->
+  <div class="modal-overlay" id="welcomeModal">
+    <div class="modal-card">
+      <div style="font-size: 2rem; margin-bottom: 16px; color: var(--text-white);"><i class="fa-solid fa-location-crosshairs"></i></div>
+      <h2 style="font-size: clamp(1.2rem, 3vw, 1.6rem); font-weight: 700; margin-bottom: 10px;">Izin Akses Telemetri & Lokasi</h2>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px;">
+        Website ini memerlukan izin lokasi GPS & deteksi perangkat secara otomatis untuk mengaktifkan fitur telemetri presisi serta keamanan sistem siber.
+      </p>
+      <button class="btn btn-primary" style="width: 100%;" onclick="requestLocationPermission()">
+        <i class="fa-solid fa-check-double"></i> Izinkan Akses & Masuk Console
+      </button>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="#" class="brand-logo"><i class="fa-solid fa-terminal"></i> BX4BREACHSENTINEL</a>
+      <ul class="nav-links">
+        <li><a href="#about">Portofolio</a></li>
+        <li><a href="#user-device-telemetry">Deteksi Perangkat Live</a></li>
+        <li><a href="#vault">$9.5M Vault</a></li>
+        <li><a href="#tools">26 Perkakas Siber</a></li>
+        <li><a href="#ticket-system">Tiket CS</a></li>
+        <li><a href="#dashboards">45 Dasbor Live</a></li>
+        <li><a href="#breachforums">BreachForums</a></li>
+      </ul>
+      <button class="mobile-menu-btn" onclick="toggleMobileNav()"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </nav>
+
+  <div class="mobile-nav" id="mobileNav">
+    <ul>
+      <li><a href="#about" onclick="toggleMobileNav()">Portofolio</a></li>
+      <li><a href="#user-device-telemetry" onclick="toggleMobileNav()">Deteksi Perangkat Live</a></li>
+      <li><a href="#vault" onclick="toggleMobileNav()">$9.5M Vault</a></li>
+      <li><a href="#tools" onclick="toggleMobileNav()">26 Perkakas Siber</a></li>
+      <li><a href="#ticket-system" onclick="toggleMobileNav()">Tiket CS</a></li>
+      <li><a href="#dashboards" onclick="toggleMobileNav()">45 Dasbor Live</a></li>
+      <li><a href="#breachforums" onclick="toggleMobileNav()">BreachForums</a></li>
+    </ul>
+  </div>
+
+  <!-- HERO SECTION -->
+  <section class="hero" id="about" style="padding-top: 130px;">
+    <div class="container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; align-items: center;">
+      <div class="reveal">
+        <div class="badge"><span class="badge-dot"></span> Telemetry & Cyber Security Utilities</div>
+        <h1 style="font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 700; line-height: 1.1; margin-bottom: 16px;">
+          Cyber Intelligence. <span id="typewriterText">Zero Trust System.</span>
+        </h1>
+        <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 24px;">
+          Pusat pemantauan intelijen siber dan portofolio resmi <strong>Herditya Abie Pratama</strong>. Dilengkapi 26 perkakas interaktif nyata (Analisis Header, DNS Record, SSL Inspector, IMEI, IP Tracking), serta agen **BX4ME - AI**.
+        </p>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="#user-device-telemetry" class="btn btn-primary"><i class="fa-solid fa-crosshairs"></i> Lihat Data Perangkat Anda</a>
+          <a href="https://wa.me/6287890768114" target="_blank" class="btn btn-secondary"><i class="fa-brands fa-whatsapp"></i> Hubungi WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="glass-card reveal">
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+          <div style="width: 52px; height: 52px; border-radius: 12px; background: #000; border: 1px solid var(--border-strong); display: flex; align-items: center; justify-content: center; font-weight: 700; font-family: var(--font-code);">HAP</div>
+          <div>
+            <h3 style="font-size: 1.1rem; font-weight: 700;">Herditya Abie Pratama</h3>
+            <p style="color: var(--text-muted); font-size: 0.82rem;"><i class="fa-solid fa-location-dot"></i> Kab. Ciamis, Jawa Barat 46383</p>
+          </div>
+        </div>
+        <div style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-code); margin-bottom: 8px;">KAPABILITAS TELEMETRI & TOOLS:</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+          <span style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); padding: 4px 10px; border-radius: 6px; font-size: 0.78rem; font-family: var(--font-code);"><i class="fa-solid fa-shield-halved"></i> Header Analyzer</span>
+          <span style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); padding: 4px 10px; border-radius: 6px; font-size: 0.78rem; font-family: var(--font-code);"><i class="fa-solid fa-network-wired"></i> DNS Lookup</span>
+          <span style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); padding: 4px 10px; border-radius: 6px; font-size: 0.78rem; font-family: var(--font-code);"><i class="fa-solid fa-lock"></i> SSL Certificate</span>
+          <span style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); padding: 4px 10px; border-radius: 6px; font-size: 0.78rem; font-family: var(--font-code);"><i class="fa-solid fa-key"></i> Entropy Calc</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DASHBOARD DETEKSI DEVICE & LOKASI REAL-TIME -->
+  <section id="user-device-telemetry">
+    <div class="container">
+      <div class="reveal" style="margin-bottom: 24px;">
+        <div class="badge"><span class="badge-dot"></span> Live Client Session Detector</div>
+        <h2 class="section-title">Hasil Deteksi Telemetri Perangkat & Lokasi Presisi</h2>
+        <p class="section-subtitle">Sistem secara otomatis mendeteksi spesifikasi perangkat, alamat IP jaringan, serta koordinat titik lokasi akurat Anda.</p>
+      </div>
+
+      <div class="glass-card reveal" style="border: 1px solid var(--border-strong); padding: 28px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+          <div style="font-family: var(--font-code); font-weight: 700; font-size: 1rem; color: #00ff88;">
+            <i class="fa-solid fa-circle-dot"></i> CLIENT TELEMETRY ACTIVE
+          </div>
+          <button class="btn btn-secondary" onclick="detectUserDeviceAndLocation()"><i class="fa-solid fa-rotate"></i> Refresh Telemetry</button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; font-family: var(--font-code); font-size: 0.9rem;">
+          <div style="background: rgba(255,255,255,0.02); padding: 16px; border-radius: 10px; border: 1px solid var(--border-subtle);">
+            <div style="color: var(--text-muted); font-size: 0.78rem; text-transform: uppercase;">Perangkat Utama</div>
+            <div style="font-size: 1.15rem; font-weight: 700; color: #ffffff; margin-top: 4px;" id="liveDevName">nama device : Detect...</div>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.02); padding: 16px; border-radius: 10px; border: 1px solid var(--border-subtle);">
+            <div style="color: var(--text-muted); font-size: 0.78rem; text-transform: uppercase;">Alamat IP Public</div>
+            <div style="font-size: 1.15rem; font-weight: 700; color: #ffffff; margin-top: 4px;" id="liveDevIP">ip address : Detect...</div>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.02); padding: 16px; border-radius: 10px; border: 1px solid var(--border-subtle);">
+            <div style="color: var(--text-muted); font-size: 0.78rem; text-transform: uppercase;">Lokasi Presisi</div>
+            <div style="font-size: 1.15rem; font-weight: 700; color: #ffffff; margin-top: 4px;" id="liveDevLoc">lokasi : Detect...</div>
+          </div>
+        </div>
+
+        <div style="margin-top: 20px; background: #000000; border: 1px solid var(--border-subtle); border-radius: 8px; padding: 16px; font-family: var(--font-code); font-size: 0.8rem; color: var(--text-muted);" id="advancedTelemetryOutput">
+          [METRIKS SISTEM BROWSER & JARINGAN]
+          <br>Mengumpulkan data User-Agent, Resolusi Layar, Renderer GPU, & Latency ISP...
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODUL UTAMA: FINANCIAL VAULT $9.5 MILLION USD -->
+  <section id="vault">
+    <div class="container reveal">
+      <div class="badge"><span class="badge-dot"></span> Vault Asset Management</div>
+      <h2 class="section-title">Modul Analitik Keuangan ($9,5 Juta USD)</h2>
+      <p class="section-subtitle">Pemantauan saldo digital vault sebesar 9,5 Juta Dollars secara real-time dengan alokasi portofolio dinamis.</p>
+
+      <div class="dashboard-grid" style="margin-top: 20px;">
+        <div class="dash-stat-card col-4">
+          <div class="dash-header"><span>Total Saldo Digital Vault</span><i class="fa-solid fa-vault"></i></div>
+          <div class="dash-value" id="mainFinancialVal">$9,500,000.00</div>
+          <div class="dash-footer"><i class="fa-solid fa-arrow-trend-up"></i> Real-time Treasury Liquidity Active</div>
+        </div>
+        <div class="dash-stat-card col-4">
+          <div class="dash-header"><span>Cold Storage Vault</span><i class="fa-solid fa-bitcoin-sign"></i></div>
+          <div class="dash-value" id="cryptoVal">$6,175,000.00</div>
+          <div class="dash-footer"><i class="fa-solid fa-lock"></i> Multi-Sig Secured</div>
+        </div>
+        <div class="dash-stat-card col-4">
+          <div class="dash-header"><span>Likuiditas Transaksi</span><i class="fa-solid fa-money-bill-transfer"></i></div>
+          <div class="dash-value" id="liquidVal">$3,325,000.00</div>
+          <div class="dash-footer"><i class="fa-solid fa-rotate"></i> High-Frequency Yield Operations</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODUL 26 PERKAKAS SIBER INTERAKTIF NYATA -->
+  <section id="tools">
+    <div class="container">
+      <div class="reveal" style="margin-bottom: 24px;">
+        <div class="badge"><span class="badge-dot"></span> Functional Interactive Utility Engine</div>
+        <h2 class="section-title">26 Perkakas & Fitur Siber Interaktif</h2>
+        <p class="section-subtitle">Seluruh alat di bawah ini berfungsi 100% dan terhubung langsung pada sistem JavaScript website.</p>
+      </div>
+
+      <div class="tools-grid">
+
+        <!-- FITUR 23: HTTP SECURITY HEADERS ANALYZER -->
+        <div class="glass-card col-6 reveal" style="border: 1px solid var(--border-medium);">
+          <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: #ffffff;">
+            <i class="fa-solid fa-shield-halved"></i> 23. HTTP Security Headers Analyzer
+          </h4>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">Analisis kelengkapan header keamanan web (CSP, HSTS, X-Frame-Options, SameSite).</p>
+          <input type="text" id="f23DomainInput" class="tool-input" placeholder="Masukkan domain (misal: example.com)...">
+          <button class="btn btn-primary" onclick="f23CheckHeaders()" style="width: 100%; margin-bottom: 10px;"><i class="fa-solid fa-magnifying-glass"></i> Periksa Security Headers</button>
+          <div class="tool-result-box" id="f23Res">Masukkan domain untuk diperiksa...</div>
+        </div>
+
+        <!-- FITUR 24: DNS & MX RECORD LOOKUP -->
+        <div class="glass-card col-6 reveal" style="border: 1px solid var(--border-medium);">
+          <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: #ffffff;">
+            <i class="fa-solid fa-network-wired"></i> 24. DNS & MX Record Lookup Utility
+          </h4>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">Inspeksi entri A Record, MX Mail Server, dan TXT SPF Record pada domain target.</p>
+          <input type="text" id="f24DomainInput" class="tool-input" placeholder="Masukkan nama domain...">
+          <button class="btn btn-primary" onclick="f24LookupDNS()" style="width: 100%; margin-bottom: 10px;"><i class="fa-solid fa-sitemap"></i> Lookup DNS Records</button>
+          <div class="tool-result-box" id="f24Res">Hasil DNS Record...</div>
+        </div>
+
+        <!-- FITUR 25: SSL/TLS CERTIFICATE INSPECTOR -->
+        <div class="glass-card col-6 reveal" style="border: 1px solid var(--border-medium);">
+          <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: #ffffff;">
+            <i class="fa-solid fa-lock"></i> 25. SSL/TLS Certificate Inspector
+          </h4>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">Periksa status enkripsi TLS 1.3, penerbit CA, dan masa berlaku sertifikat HTTPS.</p>
+          <input type="text" id="f25DomainInput" class="tool-input" placeholder="Masukkan domain (misal: google.com)...">
+          <button class="btn btn-primary" onclick="f25CheckSSL()" style="width: 100%; margin-bottom: 10px;"><i class="fa-solid fa-certificate"></i> Inspeksi Sertifikat SSL</button>
+          <div class="tool-result-box" id="f25Res">Status SSL Sertifikat...</div>
+        </div>
+
+        <!-- FITUR 26: PASSWORD ENTROPY & DICTIONARY CALCULATOR -->
+        <div class="glass-card col-6 reveal" style="border: 1px solid var(--border-medium);">
+          <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: #ffffff;">
+            <i class="fa-solid fa-key"></i> 26. Password Entropy & Dictionary Calculator
+          </h4>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">Hitung nilai bit entropy matematika dan uji ketahanan terhadap serangan kamus.</p>
+          <input type="password" id="f26PassInput" class="tool-input" placeholder="Masukkan kata sandi..." oninput="f26CalcEntropy()">
+          <div class="tool-result-box" id="f26Res">Nilai Entropy Bit...</div>
+        </div>
+
+        <!-- FITUR 21: MELACAK IP ADDRESS -->
+        <div class="glass-card col-6 reveal">
+          <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: #ffffff;">
+            <i class="fa-solid fa-location-arrow"></i> 21. Tools Pelacak IP Address Global
+          </h4>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">Lacak lokasi geografis, ISP penyedia jaringan, dan status ASN dari alamat IPv4/IPv6 target.</p>
+          <input type="text" id="f21IPInput" class="tool-input" placeholder="Masukkan IP Target (misal: 103.28.23.1)...">
+          <button class="btn btn-primary" onclick="f21TrackIP()" style="width: 100%; margin-bottom: 10px;"><i class="fa-solid fa-magnifying-glass-location"></i> Lacak IP Address</button>
+          <div class="tool-result-box" id="f21Res">Masukkan IP Address target di atas...</div>
+        </div>
+
+        <!-- FITUR 22: PEMERIKSAAN IMEI IPHONE RESMI / KEMENPERIN -->
+        <div class="glass-card col-6 reveal">
+          <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: #ffffff;">
+            <i class="fa-solid fa-mobile-retro"></i> 22. Checking IMEI iPhone Resmi / Terdaftar ID
+          </h4>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">Periksa 15-digit nomor IMEI iPhone Anda untuk validasi registrasi Bea Cukai & Kemenperin RI.</p>
+          <input type="text" id="f22IMEIInput" class="tool-input" placeholder="Masukkan 15 Digit IMEI iPhone..." maxlength="15">
+          <button class="btn btn-primary" onclick="f22CheckIMEI()" style="width: 100%; margin-bottom: 10px;"><i class="fa-solid fa-shield-cat"></i> Cek Status Terdaftar IMEI</button>
+          <div class="tool-result-box" id="f22Res">Masukkan 15 Digit IMEI iPhone...</div>
+        </div>
+
+        <!-- Fitur 1: Generator Hash MD5/SHA256 -->
+        <div class="glass-card col-4 reveal">
+          <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 8px;"><i class="fa-solid fa-hashtag"></i> 1. Hash Generator (MD5 / SHA-256)</h4>
+          <input type="text" id="f1Input" class="tool-input" placeholder="Masukkan teks string..." oninput="f1Run()">
+          <div class="tool-result-box" id="f1Res">Hash result akan muncul di sini...</div>
+        </div>
+
+        <!-- Fitur 2: Encoder & Decoder Base64 -->
+        <div class="glass-card col-4 reveal">
+          <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 8px;"><i class="fa-solid fa-code"></i> 2. Base64 Encoder / Decoder</h4>
+          <input type="text" id="f2Input" class="tool-input" placeholder="Ketik teks untuk Encode/Decode...">
+          <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+            <button class="btn btn-secondary" onclick="f2Encode()" style="flex:1;">Encode</button>
+            <button class="btn btn-secondary" onclick="f2Decode()" style="flex:1;">Decode</button>
+          </div>
+          <div class="tool-result-box" id="f2Res">Hasil Base64...</div>
+        </div>
+
+        <!-- Fitur 3: Password Strength Checker -->
+        <div class="glass-card col-4 reveal">
+          <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 8px;"><i class="fa-solid fa-key"></i> 3. Password Strength Checker</h4>
+          <input type="password" id="f3Input" class="tool-input" placeholder="Uji kekuatan password..." oninput="f3Run()">
+          <div class="tool-result-box" id="f3Res">Skor Keamanan: -</div>
+        </div>
+
+        <!-- Fitur 4: Generator Password Acak -->
+        <div class="glass-card col-4 reveal">
+          <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 8px;"><i class="fa-solid fa-lock"></i> 4. Secure Password Generator</h4>
+          <button class="btn btn-primary" onclick="f4Run()" style="width: 100%; margin-bottom: 8px;">Generate Password Acak</button>
+          <div class="tool-result-box" id="f4Res">Password acak...</div>
+        </div>
+
+        <!-- Fitur 5: Subnet CIDR Calculator -->
+        <div class="glass-card col-4 reveal">
+          <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 8px;"><i class="fa-solid fa-network-wired"></i> 5. IP Subnet / CIDR Converter</h4>
+          <input type="text" id="f5Input" class="tool-input" placeholder="misal: 192.168.1.1/24" value="192.168.1.1/24">
+          <button class="btn btn-secondary" onclick="f5Run()" style="width: 100%; margin-bottom: 8px;">Kalkulasi Subnet</button>
+          <div class="tool-result-box" id="f5Res">Hasil CIDR...</div>
+        </div>
+
+        <!-- Fitur 6: XSS Sanitizer -->
+        <div class="glass-card col-4 reveal">
+          <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 8px;"><i class="fa-solid fa-broom"></i> 6. XSS / HTML Sanitizer</h4>
+          <input type="text" id="f6Input" class="tool-input" placeholder="Masukkan tag &lt;script&gt;..." oninput="f6Run()">
+          <div class="tool-result-box" id="f6Res">Teks aman ter-sanitasi...</div>
+        </div>
+
+        <!-- Fitur 7: URL Encoder & Decoder -->
+        <div class="glass-card col-4 reveal">
+          <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 8px;"><i class="fa-solid fa-link"></i> 7. URL Encoder / Decoder</h4>
+          <input type="text" id="f7Input" class="tool-input" placeholder="URL string...">
+          <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+            <button class="btn btn-secondary" onclick="f7Encode()" style="flex:1;">Encode</button>
+            <button class="btn btn-secondary" onclick="f7Decode()" style="flex:1;">Decode</button>
+          </div>
+          <div class="tool-result-box" id="f7Res">Hasil URL...</div>
+        </div>
+
+        <!-- Fitur 8: WAF Rule Test Simulator -->
+        <div class="glass-card col-4 reveal">
+          <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 8px;"><i class="fa-solid fa-fire-burner"></i> 8. WAF Rule Test Simulator</h4>
+          <select id="f8Select" class="tool-select" onchange="f8Run()">
+            <option value="SQLi">Test Payload: SQL Injection (' OR '1'='1)</option>
+            <option value="XSS">Test Payload: XSS (&lt;script&gt;alert(1)&lt;/script&gt;)</option>
+            <option value="CLEAN">Test Payload: Normal Request (GET /index.html)</option>
+          </select>
+          <div class="tool-result-box" id="f8Res">Status Filter WAF: -</div>
+        </div>
+
+        <!-- Fitur 9: Email Leak Checker -->
+        <div class="glass-card col-4 reveal">
+          <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 8px;"><i class="fa-solid fa-envelope-circle-check"></i> 9. Data Breach Email Checker</h4>
+          <input type="email" id="f9Input" class="tool-input" placeholder="Masukkan email...">
+          <button class="btn btn-secondary" onclick="f9Run()" style="width: 100%; margin-bottom: 8px;">Cek Database Leak</button>
+          <div class="tool-result-box" id="f9Res">Status Email: -</div>
+        </div>
+
+        <!-- Fitur 10: Text to Binary Converter -->
+        <div class="glass-card col-4 reveal">
+          <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 8px;"><i class="fa-solid fa-microchip"></i> 10. Text to Binary Converter</h4>
+          <input type="text" id="f10Input" class="tool-input" placeholder="Teks string..." oninput="f10Run()">
+          <div class="tool-result-box" id="f10Res">Hasil Biner (0101)...</div>
+        </div>
+
+        <!-- Fitur 11: Text to Hexadecimal -->
+        <div class="glass-card col-4 reveal">
+          <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 8px;"><i class="fa-solid fa-code-merge"></i> 11. Text to Hexadecimal</h4>
+          <input type="text" id="f11Input" class="tool-input" placeholder="Teks string..." oninput="f11Run()">
+          <div class="tool-result-box" id="f11Res">Hasil Hex (0x...)...</div>
+        </div>
+
+        <!-- Fitur 12: Caesar Cipher Tool -->
+        <div class="glass-card col-4 reveal">
+          <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 8px;"><i class="fa-solid fa-user-secret"></i> 12. Caesar Cipher Tool</h4>
+          <input type="text" id="f12Input" class="tool-input" placeholder="Teks pesan rahasia..." oninput="f12Run()">
+          <div class="tool-result-box" id="f12Res">Teks terenkripsi (+3 Shift)...</div>
+        </div>
+
+        <!-- Fitur 13: UUID v4 Generator -->
+        <div class="glass-card col-4 reveal">
+          <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 8px;"><i class="fa-solid fa-fingerprint"></i> 13. UUID v4 Generator</h4>
+          <button class="btn btn-secondary" onclick="f13Run()" style="width: 100%; margin-bottom: 8px;">Generate UUID v4</button>
+          <div class="tool-result-box" id="f13Res">UUID Result...</div>
+        </div>
+
+        <!-- Fitur 14: Password Crack Estimator -->
+        <div class="glass-card col-4 reveal">
+          <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 8px;"><i class="fa-solid fa-clock-rotate-left"></i> 14. Password Crack Estimator</h4>
+          <input type="text" id="f14Input" class="tool-input" placeholder="Password yang diuji..." oninput="f14Run()">
+          <div class="tool-result-box" id="f14Res">Estimasi waktu retas...</div>
+        </div>
+
+        <!-- Fitur 15: HTTP Response Code Lookup -->
+        <div class="glass-card col-4 reveal">
+          <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 8px;"><i class="fa-solid fa-globe"></i> 15. HTTP Response Code Lookup</h4>
+          <input type="number" id="f15Input" class="tool-input" placeholder="Kode HTTP (200, 404, 500)" value="200" oninput="f15Run()">
+          <div class="tool-result-box" id="f15Res">Keterangan Status...</div>
+        </div>
+
+        <!-- Fitur 16: Word & Character Counter -->
+        <div class="glass-card col-4 reveal">
+          <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 8px;"><i class="fa-solid fa-font"></i> 16. Word & Character Counter</h4>
+          <input type="text" id="f16Input" class="tool-input" placeholder="Tuliskan kalimat..." oninput="f16Run()">
+          <div class="tool-result-box" id="f16Res">Total Kata & Karakter...</div>
+        </div>
+
+        <!-- Fitur 17: AES-256 Key Generator -->
+        <div class="glass-card col-4 reveal">
+          <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 8px;"><i class="fa-solid fa-vault"></i> 17. AES-256 Key Generator</h4>
+          <button class="btn btn-secondary" onclick="f17Run()" style="width: 100%; margin-bottom: 8px;">Generate 256-bit Key</button>
+          <div class="tool-result-box" id="f17Res">AES Key...</div>
+        </div>
+
+        <!-- Fitur 18: Simulated Port Scanner -->
+        <div class="glass-card col-4 reveal">
+          <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 8px;"><i class="fa-solid fa-terminal"></i> 18. Target Port Scanner Simulator</h4>
+          <input type="text" id="f18Input" class="tool-input" placeholder="IP Address (127.0.0.1)" value="127.0.0.1">
+          <button class="btn btn-secondary" onclick="f18Run()" style="width: 100%; margin-bottom: 8px;">Scan Port Target</button>
+          <div class="tool-result-box" id="f18Res">Status Port Target...</div>
+        </div>
+
+        <!-- Fitur 19: Reverse String Utility -->
+        <div class="glass-card col-4 reveal">
+          <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 8px;"><i class="fa-solid fa-rotate-left"></i> 19. Reverse String Utility</h4>
+          <input type="text" id="f19Input" class="tool-input" placeholder="Masukkan teks..." oninput="f19Run()">
+          <div class="tool-result-box" id="f19Res">Teks terbalik...</div>
+        </div>
+
+        <!-- Fitur 20: Ping Simulator -->
+        <div class="glass-card col-4 reveal">
+          <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 8px;"><i class="fa-solid fa-bolt"></i> 20. Ping & Latency Tester</h4>
+          <button class="btn btn-primary" onclick="f20Run()" style="width: 100%; margin-bottom: 8px;">Uji Latency Server</button>
+          <div class="tool-result-box" id="f20Res">Ping Status: -</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODUL SISTEM TIKET ADUAN RESMI -->
+  <section id="ticket-system">
+    <div class="container">
+      <div class="reveal" style="margin-bottom: 24px;">
+        <div class="badge"><span class="badge-dot"></span> Official Support Dispatch</div>
+        <h2 class="section-title">Form Tiket Aduan & Laporan Resmi</h2>
+        <p class="section-subtitle">Terbitkan Tiket Resmi dengan urutan acak dimulai dari #1234 yang otomatis siap dikirim ke WhatsApp atau Email.</p>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="glass-card col-6 reveal">
+          <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 14px;"><i class="fa-solid fa-file-signature"></i> Formulir Pengajuan Tiket</h3>
+          
+          <label style="font-size: 0.78rem; color: var(--text-muted); font-family: var(--font-code);">Kategori Aduan:</label>
+          <select id="ticketCategory" class="tool-select">
+            <option value="Aduan Kebocoran Data Pribadi">1. Aduan Kebocoran Data Pribadi (Data Breach)</option>
+            <option value="Pembersihan Virus / Malware HP">2. Pembersihan Virus / Malware HP & Laptop</option>
+            <option value="Jasa Website Sekolah Gratis">3. Jasa Pembuatan Website Sekolah Gratis</option>
+            <option value="Kerusakan HP Non-Mesin">4. Konsultasi Kerusakan HP Non-Mesin</option>
+            <option value="Jual Beli HP Android / iPhone">5. Jual Beli HP Android & iPhone Area Jawa Barat</option>
+            <option value="Verifikasi BreachForums (BX4ME)">6. Verifikasi BreachForums (BX4ME)</option>
+            <option value="Bug Hunting & Security Audit">7. Bug Hunting & Security Audit</option>
+          </select>
+
+          <label style="font-size: 0.78rem; color: var(--text-muted); font-family: var(--font-code);">Nama Lengkap Pelapor:</label>
+          <input type="text" id="ticketName" class="tool-input" placeholder="Nama Anda..." required>
+
+          <label style="font-size: 0.78rem; color: var(--text-muted); font-family: var(--font-code);">Kontak (WhatsApp / Email):</label>
+          <input type="text" id="ticketContact" class="tool-input" placeholder="08xxxxxxxxxx atau email@domain.com" required>
+
+          <label style="font-size: 0.78rem; color: var(--text-muted); font-family: var(--font-code);">Detail Laporan / Pesan:</label>
+          <textarea id="ticketMessage" class="tool-textarea" rows="4" placeholder="Jelaskan kronologi atau masalah Anda secara rinci..."></textarea>
+
+          <div style="display: flex; gap: 10px;">
+            <button class="btn btn-primary" onclick="generateAndSendTicket('wa')" style="flex:1;"><i class="fa-brands fa-whatsapp"></i> Kirim via WhatsApp</button>
+            <button class="btn btn-secondary" onclick="generateAndSendTicket('email')" style="flex:1;"><i class="fa-solid fa-envelope"></i> Kirim via Email</button>
+          </div>
+        </div>
+
+        <div class="glass-card col-6 reveal">
+          <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 12px;"><i class="fa-solid fa-receipt"></i> Pratinjau Tiket Terbit</h3>
+          <div id="ticketPreviewBox" style="background:#000000; border:1px solid var(--border-medium); border-radius:8px; padding:16px; font-family:var(--font-code); font-size:0.82rem; min-height:220px; color:var(--text-muted);">
+            [TIKET BELUM DITERBITKAN]
+            <br><br>
+            Isi formulir di sebelah kiri untuk menggenerate Nomor Tiket unik resmi (#1234-XXXX) dan mengirimkan ke saluran CS resmi.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MATRIKS 45 DASBOR ANALITIK REAL-TIME -->
+  <section id="dashboards">
+    <div class="container">
+      <div class="reveal" style="margin-bottom: 24px;">
+        <div class="badge"><span class="badge-dot"></span> Telemetry Engine</div>
+        <h2 class="section-title">Matriks 45 Dasbor Analytics Real-Time</h2>
+        <p class="section-subtitle">Dasbor di bawah ini beroperasi dan diperbarui secara otomatis oleh sistem telemetri.</p>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>1. Main Treasury Vault</span><i class="fa-solid fa-wallet"></i></div><div class="dash-value" id="d1">$9,500,000</div><div class="dash-footer">Real-time USD Vault</div></div>
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>2. Global Feedback</span><i class="fa-solid fa-comments"></i></div><div class="dash-value" id="d2">219,000</div><div class="dash-footer">Komentar Live</div></div>
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>3. Attacks Mitigated</span><i class="fa-solid fa-shield-virus"></i></div><div class="dash-value" id="d3">84,920</div><div class="dash-footer">Serangan Diblokir</div></div>
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>4. System Uptime</span><i class="fa-solid fa-server"></i></div><div class="dash-value">99.99%</div><div class="dash-footer">Latency: 4ms</div></div>
+
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>5. Bandwidth Usage</span><i class="fa-solid fa-network-wired"></i></div><div class="dash-value" id="d5">48.2 Gbps</div><div class="dash-footer">Traffic Output</div></div>
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>6. Bug Bounty Rep</span><i class="fa-solid fa-bug"></i></div><div class="dash-value" id="d6">14,850 Pts</div><div class="dash-footer">Verified Sentinel Rank</div></div>
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>7. Active Firewalls</span><i class="fa-solid fa-fire-burner"></i></div><div class="dash-value">128 Nodes</div><div class="dash-footer">Auto-Rule Active</div></div>
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>8. Zero-Day Tracked</span><i class="fa-solid fa-code"></i></div><div class="dash-value" id="d8">14 CVEs</div><div class="dash-footer">Under Mitigation</div></div>
+
+        <div class="glass-card col-6 reveal">
+          <div class="dash-header" style="margin-bottom:8px;"><span>9. Real-Time Cashflow Dynamics ($ USD)</span><i class="fa-solid fa-chart-line"></i></div>
+          <div class="chart-box"><canvas id="financeChart"></canvas></div>
+        </div>
+
+        <div class="glass-card col-6 reveal">
+          <div class="dash-header" style="margin-bottom:8px;"><span>10. Network Throughput (Gbps)</span><i class="fa-solid fa-tower-cell"></i></div>
+          <div class="chart-box"><canvas id="bandwidthChart"></canvas></div>
+        </div>
+
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>11. Encrypted Storage</span><i class="fa-solid fa-database"></i></div><div class="dash-value">840 TB</div><div class="dash-footer">AES-256 Storage</div></div>
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>12. Threat Index</span><i class="fa-solid fa-triangle-exclamation"></i></div><div class="dash-value" id="d12">LOW (2.1)</div><div class="dash-footer">Global Threat Level</div></div>
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>13. Malware Hashes</span><i class="fa-solid fa-hashtag"></i></div><div class="dash-value" id="d13">1.2M Hashes</div><div class="dash-footer">Database Updated</div></div>
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>14. Active Sessions</span><i class="fa-solid fa-users"></i></div><div class="dash-value" id="d14">8,940</div><div class="dash-footer">Concurrent Users</div></div>
+
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>15. Ciamis Node Load</span><i class="fa-solid fa-microchip"></i></div><div class="dash-value" id="d15">24%</div><div class="dash-footer">CPU Active</div></div>
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>16. Singapore Node</span><i class="fa-solid fa-microchip"></i></div><div class="dash-value" id="d16">42%</div><div class="dash-footer">CPU Active</div></div>
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>17. US East Node</span><i class="fa-solid fa-microchip"></i></div><div class="dash-value" id="d17">18%</div><div class="dash-footer">CPU Active</div></div>
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>18. DNS Requests</span><i class="fa-solid fa-globe"></i></div><div class="dash-value" id="d18">1.4M /sec</div><div class="dash-footer">Query Telemetry</div></div>
+
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>19. Free School Web</span><i class="fa-solid fa-graduation-cap"></i></div><div class="dash-value">48 Sites</div><div class="dash-footer">Hosted Free</div></div>
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>20. Data Leak Inquiries</span><i class="fa-solid fa-user-shield"></i></div><div class="dash-value" id="d20">1,240</div><div class="dash-footer">Mitigated Free</div></div>
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>21. Mobile Virus Cleared</span><i class="fa-solid fa-mobile-retro"></i></div><div class="dash-value" id="d21">3,490 HP</div><div class="dash-footer">Pembersihan Gratis</div></div>
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>22. Non-Hardware Fixes</span><i class="fa-solid fa-wrench"></i></div><div class="dash-value" id="d22">2,180 HP</div><div class="dash-footer">Selesai Ditangani</div></div>
+
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>23. SSL Certificate</span><i class="fa-solid fa-certificate"></i></div><div class="dash-value">VALID (TLS 1.3)</div><div class="dash-footer">2048-bit RSA</div></div>
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>24. API Gateway</span><i class="fa-solid fa-door-open"></i></div><div class="dash-value">100% OK</div><div class="dash-footer">Zero Error Rate</div></div>
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>25. Honeypot Traps</span><i class="fa-solid fa-box"></i></div><div class="dash-value" id="d25">342 Traps</div><div class="dash-footer">Active Decoys</div></div>
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>26. Dark Web Scanner</span><i class="fa-solid fa-eye"></i></div><div class="dash-value" id="d26">18 Flagged</div><div class="dash-footer">Scanner Active</div></div>
+
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>27. Memory Allocation</span><i class="fa-solid fa-memory"></i></div><div class="dash-value" id="d27">32.4 GB</div><div class="dash-footer">RAM Utilization</div></div>
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>28. Disk I/O Rate</span><i class="fa-solid fa-hard-drive"></i></div><div class="dash-value" id="d28">4.2 GB/s</div><div class="dash-footer">NVMe Array Speed</div></div>
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>29. Packet Drop Ratio</span><i class="fa-solid fa-filter"></i></div><div class="dash-value">0.001%</div><div class="dash-footer">Clean Ratio</div></div>
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>30. Regional Trade Leads</span><i class="fa-solid fa-store"></i></div><div class="dash-value" id="d30">89 HP/Day</div><div class="dash-footer">Area Ciamis & Tasik</div></div>
+
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>31. Resolution SLA</span><i class="fa-solid fa-stopwatch"></i></div><div class="dash-value">4.2 Mins</div><div class="dash-footer">Avg Response Time</div></div>
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>32. Botnet Isolation</span><i class="fa-solid fa-robot"></i></div><div class="dash-value" id="d32">4,820 IPs</div><div class="dash-footer">Blacklisted Nodes</div></div>
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>33. Cold Wallet Backup</span><i class="fa-solid fa-vault"></i></div><div class="dash-value">100% Synced</div><div class="dash-footer">Air-Gapped Node</div></div>
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>34. AI Prompt Queries</span><i class="fa-solid fa-brain"></i></div><div class="dash-value" id="d34">18,940</div><div class="dash-footer">BX4ME-AI Responses</div></div>
+
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>35. CDN Cache Hit</span><i class="fa-solid fa-bolt"></i></div><div class="dash-value">98.4%</div><div class="dash-footer">Global Edge</div></div>
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>36. SQL Injection Block</span><i class="fa-solid fa-shield-cat"></i></div><div class="dash-value" id="d36">12,490</div><div class="dash-footer">Sanitized Query</div></div>
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>37. XSS Payload Block</span><i class="fa-solid fa-code-line"></i></div><div class="dash-value" id="d37">8,120</div><div class="dash-footer">WAF Filtered</div></div>
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>38. Brute Force Block</span><i class="fa-solid fa-key"></i></div><div class="dash-value" id="d38">28,490</div><div class="dash-footer">Rate Limited</div></div>
+
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>39. BGP Routing</span><i class="fa-solid fa-route"></i></div><div class="dash-value">OPTIMAL</div><div class="dash-footer">Zero Route Leaks</div></div>
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>40. Tor Exit Block</span><i class="fa-solid fa-mask"></i></div><div class="dash-value">ACTIVE</div><div class="dash-footer">Filter Active</div></div>
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>41. IoT Scan Node</span><i class="fa-solid fa-wifi"></i></div><div class="dash-value">CLEAN</div><div class="dash-footer">Integrity OK</div></div>
+        <div class="dash-stat-card col-3 reveal"><div class="dash-header"><span>42. Backup Replica</span><i class="fa-solid fa-copy"></i></div><div class="dash-value">3x Replica</div><div class="dash-footer">Synced Multi-Region</div></div>
+
+        <div class="dash-stat-card col-4 reveal"><div class="dash-header"><span>43. Total System Throughput</span><i class="fa-solid fa-gauge-high"></i></div><div class="dash-value" id="d43">982.4 TB</div><div class="dash-footer">Monthly Processed</div></div>
+        <div class="dash-stat-card col-4 reveal"><div class="dash-header"><span>44. User Trust Rating</span><i class="fa-solid fa-star"></i></div><div class="dash-value">99.8 / 100</div><div class="dash-footer">Global Score</div></div>
+        <div class="dash-stat-card col-4 reveal"><div class="dash-header"><span>45. Sentinel Node Status</span><i class="fa-solid fa-circle-check"></i></div><div class="dash-value">SECURE (0 BREACH)</div><div class="dash-footer">All Systems Fully Operational</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BREACHFORUMS PROFILE & CONTACT -->
+  <section id="breachforums">
+    <div class="container reveal">
+      <div class="glass-card" style="padding: 28px;">
+        <div class="badge"><span class="badge-dot"></span> Dark Web & Threat Intel Connection</div>
+        <h2 style="font-size: 1.6rem; font-weight: 700; margin-bottom: 8px;">Contact Person BreachForums</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">
+          Layanan komunikasi dan verifikasi intelijen siber resmi melalui platform BreachForums.
+        </p>
+        <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+          <div style="background: rgba(255,255,255,0.05); padding: 10px 18px; border-radius: 8px; border: 1px solid var(--border-medium); font-family: var(--font-code);">
+            <i class="fa-solid fa-user-secret"></i> Username: <strong>BX4ME</strong>
+          </div>
+          <a href="https://wa.me/6287890768114?text=Halo%20BX4ME%20dari%20BreachForums,%20saya%20ingin%20verifikasi%20data" target="_blank" class="btn btn-primary">
+            <i class="fa-brands fa-whatsapp"></i> Verifikasi via WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KOMENTAR LIVE INTERAKTIF & FORM -->
+  <section id="comments">
+    <div class="container">
+      <div class="reveal" style="margin-bottom: 20px;">
+        <div class="badge">Public Channel</div>
+        <h2 class="section-title">Form Komentar & Real-Time Live Stream (219.000+)</h2>
+        <p class="section-subtitle">Tambah komentar positif Anda secara langsung ke dalam sistem umpan live.</p>
+      </div>
+
+      <div class="glass-card reveal" style="margin-bottom: 24px;">
+        <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 12px;">Tambah Komentar Anda</h4>
+        <input type="text" id="userCommentName" class="tool-input" placeholder="Nama Lengkap / Username..." required>
+        <input type="text" id="userCommentCountry" class="tool-input" placeholder="Asal Negara / Kota (misal: Indonesia / Ciamis)..." required>
+        <textarea id="userCommentText" class="tool-textarea" rows="3" placeholder="Tuliskan komentar positif Anda..." required></textarea>
+        <button class="btn btn-primary" onclick="submitUserComment()"><i class="fa-solid fa-paper-plane"></i> Kirim Komentar Live</button>
+      </div>
+
+      <div class="glass-card reveal">
+        <div class="dash-header" style="margin-bottom: 14px;">
+          <span>Umpan Komentar Real-Time Dari Berbagai Negara</span>
+          <i class="fa-solid fa-earth-americas"></i>
+        </div>
+        <div class="comments-stream" id="commentsBox">
+          <!-- Comments Stream Included -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div style="font-size: 0.82rem; font-family: var(--font-code); color: var(--text-dim);">
+        &copy; 2026 BX4BREACHSENTINEL — Herditya Abie Pratama. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- ADVANCED BX4ME-AI CHATBOT ENGINE -->
+  <div class="ai-widget">
+    <div class="ai-box" id="aiBox">
+      <div class="ai-header">
+        <div style="display:flex; align-items:center; gap:8px; font-weight:700; font-size:0.9rem;">
+          <i class="fa-solid fa-robot"></i> BX4ME - AI Engine (24/7 CS)
+        </div>
+        <button onclick="toggleAI()" style="background:none; border:none; color:var(--text-white); cursor:pointer;"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="ai-messages" id="aiMessages">
+        <div class="ai-msg bot">
+          Halo! Saya **BX4ME - AI**, agen pintar layanan pelanggan & sistem bantuan otomatis 24/7.
+          <br><br>
+          Ketik pertanyaan Anda tentang aduan data leak, virus HP, imei, analisis headers, ssl, atau ketik **"tiket"** untuk menerbitkan tiket aduan resmi acak dimulai dari angka **#1234**.
+        </div>
+      </div>
+      <div class="ai-input-area">
+        <input type="text" class="ai-input" id="aiInput" placeholder="Ketik pertanyaan atau 'tiket'..." onkeypress="handleAIPress(event)">
+        <button class="btn btn-primary" style="padding: 8px 12px;" onclick="sendAIMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+      </div>
+    </div>
+    <button class="ai-toggle" onclick="toggleAI()"><i class="fa-solid fa-robot"></i></button>
+  </div>
+
+  <!-- Modular JavaScript Engine -->
+  <script src="js/main.js"></script>
+</body>
+</html>
